@@ -5,7 +5,7 @@ using petshop.api.Services;
 
 namespace petshop.api.Controllers
 {
-    [Route("api[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class AnimalController : Controller
     {
@@ -17,8 +17,13 @@ namespace petshop.api.Controllers
 
         [HttpPost]
         public async Task Cadastrar([FromBody] Animal animal){
-            await _mongoDbService.Insere(animal);
-            
+            await _mongoDbService.Insere(animal);           
+        }
+
+        [HttpGet]
+        public async Task<JsonResult> PegarTodosAnimais(){
+              var todosAnimais = await _mongoDbService.GetAllAnimals();
+              return Json(todosAnimais);
         }
     }
 }
