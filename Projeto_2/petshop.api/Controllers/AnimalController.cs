@@ -12,9 +12,10 @@ namespace petshop.api.Controllers
         public readonly MongoDbService _mongoDbService;
 
         public AnimalController(){
-            _mongoDbService = new MongoDbService("AnimalDatabase","Animal","mongodb://localhost:127.0.0.1:27017")
+            _mongoDbService = new MongoDbService("AnimalDatabase","Animal","mongodb://localhost:27017");
         }
 
+        [HttpPost]
         public async Task Cadastrar([FromBody] Animal animal){
             await _mongoDbService.Insere(animal);
             
