@@ -25,5 +25,14 @@ namespace petshop.api.Controllers
               var todosAnimais = await _mongoDbService.GetAllAnimals();
               return Json(todosAnimais);
         }
+
+        [HttpGet("{id}",Name = "PegarAniaml")]
+        public ActionResult<Animal> PegarAnimalPorId(string id){
+               var animal = _mongoDbService.Get(id);
+               if(animal == null){
+                   return NotFound();
+               }
+               return animal;
+        }
     }
 }
